@@ -41,15 +41,15 @@ KNOWN ISSUES:
 */
 
 /**
+ * On creation of a UUID object, set its initial value.
  * @constructor
- * On creation of a UUID object, set it's initial value
  */
 com.qwirx.util.UUID = function()
 {
 	this.id = this.createUUID();
 };
 
-// When asked what this Object is, lie and return it's value
+// When asked what this Object is, lie and return its value
 com.qwirx.util.UUID.prototype.valueOf = function(){ return this.id; }
 com.qwirx.util.UUID.prototype.toString = function(){ return this.id; }
 

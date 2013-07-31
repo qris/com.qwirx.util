@@ -39,10 +39,7 @@ com.qwirx.util.Array.withKeys = function(/* varargs */)
  * Binary search on a sorted structure, to find an existing node OR
  * the correct insertion point to maintain sort order.
  *
- * @param length The number of items in the structure, i.e. the
- * maximum index that may be passed to compareFn plus one.
- *
- * @param compareFn a generic comparison function that, given an
+ * Takes a generic comparison function which, given an
  * index into the data (its only parameter) returns 0 if the data
  * item at that index is the target; < 0 if it's after the target
  * and > 0 if it's before the target. This is just a generalisation
@@ -54,6 +51,11 @@ com.qwirx.util.Array.withKeys = function(/* varargs */)
  *     return goog.array.defaultCompare(array[i].name, target.name);
  * }
  * </pre>
+ * 
+ * @param length The number of items in the structure, i.e. the
+ * maximum index that may be passed to compareFn plus one.
+ *
+ * @param {function} compareFn The generic comparison function to use.
  *
  * @return an index >=0 of an existing node, or ~index (< 0) with the
  * insertion point if no matching node exists already.

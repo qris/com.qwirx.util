@@ -1,9 +1,9 @@
 goog.provide('com.qwirx.util.Exception');
 
 /**
- * @constructor
  * A base class for Freebase exceptions, that knows how to include
  * a stack trace on Chrome/V8.
+ * @constructor
  */
 com.qwirx.util.Exception = function(message)
 {
@@ -49,14 +49,14 @@ goog.require('goog.events.Event');
  *
  * @constructor
  * @param {Error} exception The exception that would have been thrown,
- *   preferably a subclass of {@link com.qwirx.util.Exception} which
- *   gives it a stack trace.
- * @param source The component that would have thrown the 
+ *   preferably a subclass of Exception which gives it a stack trace.
+ * @param {goog.events.EventTarget} source The component that would have 
+ *   thrown the 
  *   exception. Since any component can handle events, the source
  *   could be of any type, even a function; however it would normally
- *   be a {@link goog.events.EventTarget}, so it can have events
+ *   be a goog.events.EventTarget, so it can have events
  *   thrown at it, and it would often be the UI component that handles
- *   a browser event, such as a {@link goog.ui.Button}.
+ *   a browser event, such as a goog.ui.Button.
  */
 com.qwirx.util.ExceptionEvent = function(exception, source)
 {
@@ -73,12 +73,11 @@ com.qwirx.util.ExceptionEvent.EVENT_TYPE = 'com.qwirx.util.ExceptionEvent';
  * @returns The component that would have thrown the 
  *   exception. Since any component can handle events, the source
  *   could be of any type, even a function; however it would normally
- *   be a {@link goog.events.EventTarget}, so it can have events
+ *   be a goog.events.EventTarget, so it can have events
  *   thrown at it, and it would often be the UI component that handles
- *   a browser event, such as a {@link goog.ui.Button}. Currently this
+ *   a browser event, such as a goog.ui.Button. Currently this
  *   is expected to be the same as the event's
- *   {@link goog.events.Event.prototype.target} property, and hence
- *   is not used.
+ *   <code>target</code> property, and hence is not used.
  */
 com.qwirx.util.ExceptionEvent.prototype.getSource = function()
 {
