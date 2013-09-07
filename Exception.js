@@ -33,9 +33,19 @@ com.qwirx.util.Exception = function(message)
 };
 goog.inherits(com.qwirx.util.Exception, Error);
 
-goog.provide('com.qwirx.util.ExceptionEvent');
-goog.require('goog.events.Event');
+/**
+ * Patch stack trace support into goog.testing.JsUnitException
+ */
+goog.require('goog.testing.JsUnitException');
+com.qwirx.util.OldJsUnitException = goog.testing.JsUnitException;
+goog.testing.JsUnitException = function(comment, opt_message)
+{
+	goog.base(this);
+	com.qwirx.util.OldJsUnitException.call(this, comment, opt_message);
+};
+goog.inherits(goog.testing.JsUnitException, com.qwirx.util.Exception);
 
+goog.provide('com.qwirx.util.ExceptionEvent');
 /**
  * An {@link goog.events.Event} fired by a component when it would
  * otherwise throw an exception, but in response to a browser event
@@ -64,7 +74,7 @@ com.qwirx.util.ExceptionEvent = function(exception, source)
 	this.source = source;
 	this.exception_ = exception;
 }
-
+goog.require('goog.events.Event');
 goog.inherits(com.qwirx.util.ExceptionEvent, goog.events.Event);
 
 com.qwirx.util.ExceptionEvent.EVENT_TYPE = 'com.qwirx.util.ExceptionEvent';
