@@ -5,7 +5,9 @@ goog.provide('com.qwirx.util.UUID');
 
 com.qwirx.util.UUID.js - Version 0.3
 JavaScript Class to create a UUID like identifier
+*/
 
+/*
 Copyright (C) 2006-2008, Erik Giberti (AF-Design), All rights reserved.
 
 This program is free software; you can redistribute it and/or modify it under 
@@ -22,7 +24,7 @@ this program; if not, write to the Free Software Foundation, Inc., 59 Temple
 Place, Suite 330, Boston, MA 02111-1307 USA
 
 The latest version of this file can be downloaded from
-http://www.af-design.com/resources/javascript_com.qwirx.util.UUID.php
+http://www.af-design.com/resources/javascript_uuid.php
 
 HISTORY:
 6/5/06 	- Initial Release
