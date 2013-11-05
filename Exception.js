@@ -99,3 +99,49 @@ com.qwirx.util.ExceptionEvent.prototype.getException = function()
 	return this.exception_;
 }
 
+/**
+ * Static method that guards a callback against exceptions, sending
+ * an event to allow interested parties to deal with the exception.
+ * You should always use this guard in event handlers!
+ */
+com.qwirx.util.ExceptionEvent.guard = function(callback)
+{
+	return function(/* varargs */)
+	{
+		try
+		{
+			callback.apply(this, arguments);
+		}
+		catch (exception)
+		{
+			if (exception instanceof goog.events.Event)
+			{
+				throw new com.qwirx.util.Exception("For the love of God, " +
+					"will you PLEASE stop throwing Events at me? " + 
+					exception.type);
+			}
+			
+			event = new com.qwirx.util.ExceptionEvent(exception, this);
+			var ret = goog.events.dispatchEvent(this, event);
+
+			// From goog.events.dispatchEvent comments:
+			// If anyone called preventDefault on the event object (or
+			// if any of the handlers returns false) this will also return
+			// false. If there are no handlers, or if all handlers return
+			// true, this returns true.
+			//
+			// A true return value indicates that no handler intercepted
+			// the exception event, so rethrow it to help with debugging.
+			if (ret)
+			{
+				if (exception.message)
+				{
+					exception.message += " (a com.qwirx.util.ExceptionEvent " +
+						"was thrown, but nothing handled it.)";
+				}
+				
+				throw exception;
+			}
+		}
+	}
+};
